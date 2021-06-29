@@ -38,4 +38,25 @@ app.get('/createdb', (req, res) => {
   });
 });
 
+// create table
+app.get('/table/create', (req, res) => {
+  const sql = `
+  CREATE TABLE posts(
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    body TEXT NOT NULL,
+    created_at TIMESTAMP on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+)
+  `;
+  db.query(sql, (err, result) => {
+    if (err) {
+      res.send(err.stack);
+      throw err;
+    }
+    console.log(result);
+    res.json({ msg: 'lentele sukurta', result });
+  });
+});
+
 app.listen('3001', console.log('Server running, port 3001'));
