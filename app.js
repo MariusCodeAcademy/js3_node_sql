@@ -67,8 +67,7 @@ app.get('/table/create', (req, res) => {
 // add new post
 app.post('/newpost', (req, res) => {
   console.log('req.body', req.body);
-
-  const newPost = { title: 'Third Post Title', body: 'Third post body and something' };
+  //   const newPost = { title: 'Third Post Title', body: 'Third post body and something' };
   const sql = 'INSERT INTO posts SET ?';
   db.query(sql, req.body, (err, result) => {
     if (err) throw err.stack;

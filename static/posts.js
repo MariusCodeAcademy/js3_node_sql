@@ -21,3 +21,7 @@ console.log('hello from posts');
 
 // virs saraso yra mygtukai : all authors(rodo visus ), young authors (rodo autorius kuriu amzius < 30), female authors
 // paspaudus mes is db parsiunciam atitinkamus duomenis ir juos atvaizduojam
+
+// padaryti kad lyties pasirinkimas formoje butu selectas
+
+// padaryti kad postId pasirinkimas formoj butu selectas tu postu kurie yra siuo metu sukurti
