@@ -70,7 +70,7 @@ app.get('/newpost', (req, res) => {
 });
 
 // get all posts
-app.get('/allposts', (req, res) => {
+app.get('/post', (req, res) => {
   const sql = 'SELECT * FROM posts';
   db.query(sql, (err, result) => {
     if (err) throw err.stack;
@@ -97,6 +97,15 @@ app.get('/post/:id/update', (req, res) => {
   db.query(sql, (err, result) => {
     if (err) throw err.stack;
     res.redirect('/allposts');
+  });
+});
+
+// delete post
+app.get('/post/:id/delete', (req, res) => {
+  const sql = `DELETE FROM posts WHERE id = ${db.escape(req.params.id)}`;
+  db.query(sql, (err, result) => {
+    if (err) throw err.stack;
+    res.json({ delete: 'success', result });
   });
 });
 
