@@ -59,4 +59,14 @@ app.get('/table/create', (req, res) => {
   });
 });
 
+// add new post
+app.get('/newpost', (req, res) => {
+  const newPost = { title: 'Third Post Title', body: 'Third post body and something' };
+  const sql = 'INSERT INTO posts SET ?';
+  db.query(sql, newPost, (err, result) => {
+    if (err) throw err.stack;
+    res.json({ msg: 'irasas sukurtas', result });
+  });
+});
+
 app.listen('3001', console.log('Server running, port 3001'));
