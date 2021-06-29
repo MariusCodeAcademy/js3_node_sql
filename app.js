@@ -24,7 +24,8 @@ const app = express();
 // middleWare
 app.use(morgan('common'));
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'static')));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
@@ -71,7 +72,8 @@ app.post('/newpost', (req, res) => {
   const sql = 'INSERT INTO posts SET ?';
   db.query(sql, req.body, (err, result) => {
     if (err) throw err.stack;
-    res.json({ msg: 'irasas sukurtas', result });
+    res.redirect('/post');
+    // res.json({ msg: 'irasas sukurtas', result });
   });
 });
 
