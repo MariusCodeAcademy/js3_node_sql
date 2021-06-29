@@ -1,0 +1,20 @@
+{
+  "name": "mysql-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MariusCodeAcademy/js3_node_sql.git"
+  },
+  "keywords": [],
+  "author": "Marius Kuzminskas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MariusCodeAcademy/js3_node_sql/issues"
+  },
+  "homepage": "https://github.com/MariusCodeAcademy/js3_node_sql#readme"
+}
