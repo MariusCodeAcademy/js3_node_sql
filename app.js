@@ -64,6 +64,8 @@ app.get('/table/create', (req, res) => {
   });
 });
 
+// app.get('/authors/young' )
+
 // add new post
 app.post('/newpost', (req, res) => {
   console.log('req.body', req.body);
@@ -113,6 +115,15 @@ app.get('/post/:id/delete', (req, res) => {
   db.query(sql, (err, result) => {
     if (err) throw err.stack;
     res.json({ delete: 'success', result });
+  });
+});
+
+// get ids and titles
+app.get('/post-ids', (req, res) => {
+  const sql = 'SELECT id, title FROM posts';
+  db.query(sql, (err, result) => {
+    if (err) throw err.stack;
+    res.json(result);
   });
 });
 
