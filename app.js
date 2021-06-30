@@ -127,6 +127,7 @@ app.get('/post-ids', (req, res) => {
   });
 });
 
+// creat authors table
 app.get('/authors/create-table', (req, res) => {
   const sql = `
   CREATE TABLE \`nodesqljs3\`.\`authors\` ( 
@@ -145,6 +146,24 @@ app.get('/authors/create-table', (req, res) => {
     }
     console.log(result);
     res.json({ success: 'table created', result });
+  });
+});
+
+// get author and posts
+app.get('/authors-and-posts', (req, res) => {
+  const sql = `
+  SELECT posts.title, authors.name, authors.age
+  FROM posts
+  INNER JOIN authors
+  ON posts.id = authors.post_id;
+  `;
+  db.query(sql, (err, result) => {
+    if (err) {
+      res.json({ success: false, err: err.stack });
+      throw err.stack;
+    }
+    console.log(result);
+    res.json({ success: true, result });
   });
 });
 

@@ -1,6 +1,7 @@
 console.log('hello from posts');
 
 const ulEl = document.getElementById('ul');
+const authEl = document.getElementById('auth');
 const idSelectEl = document.getElementById('ids');
 const createAuthorsBtnEl = document.getElementById('author-table-create');
 
@@ -68,3 +69,17 @@ createAuthorsBtnEl.addEventListener('click', createAuthorsTable);
 
 // padaryti kad postId pasirinkimas formoj butu selectas tu postu kurie yra siuo metu sukurti
 getData('/post-ids').then((data) => generateIdSelect(data));
+
+function generateAuthPosts(data) {
+  data.forEach(({ title, name, age }) => {
+    const li = document.createElement('li');
+    li.innerHTML = `${name}, ${age} years old. Posts: ${title} `;
+    authEl.append(li);
+  });
+}
+// atvaizduoti autorius ir posts titles
+getData('/authors-and-posts').then((data) => {
+  if (data.success) {
+    generateAuthPosts(data.result);
+  }
+});
