@@ -127,4 +127,25 @@ app.get('/post-ids', (req, res) => {
   });
 });
 
+app.get('/authors/create-table', (req, res) => {
+  const sql = `
+  CREATE TABLE \`nodesqljs3\`.\`authors\` ( 
+    \`au_id\` INT(2) NOT NULL AUTO_INCREMENT , 
+    \`name\` VARCHAR(30) NOT NULL , 
+    \`sex\` VARCHAR(6) NOT NULL , 
+    \`age\` INT(2) NOT NULL , 
+    \`post_id\` INT(2) NOT NULL , 
+    \`created_at\` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+    PRIMARY KEY (\`au_id\`)) ENGINE = InnoDB;
+  `;
+  db.query(sql, (err, result) => {
+    if (err) {
+      res.json({ success: false, err: err.stack });
+      throw err.stack;
+    }
+    console.log(result);
+    res.json({ success: 'table created', result });
+  });
+});
+
 app.listen('3001', console.log('Server running, port 3001'));
