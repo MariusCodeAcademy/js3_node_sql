@@ -2,8 +2,9 @@ console.log('hello from posts');
 
 const ulEl = document.getElementById('ul');
 const idSelectEl = document.getElementById('ids');
+const createAuthorsBtnEl = document.getElementById('author-table-create');
 
-async function getData(url) {
+async function getData(url, successCallback) {
   try {
     const resp = await fetch(url);
     const data = await resp.json();
@@ -40,7 +41,18 @@ getData('/post').then((data) => generateLi(data));
 
 // lenteleje turi buti stulpeliai
 // au_id INT Primary key, name VARCHAR, sex VARCHAR, age INT, post_id INT
-
+async function createAuthorsTable() {
+  // getData('/authors/create-table').then((data) => console.log(data));
+  const data = await getData('/authors/create-table');
+  let msg;
+  if (data.success) {
+    msg = '<p>Table created successfuly</p>';
+  } else {
+    msg = `<p>Error creating table </p> <p>${data.err}</p>`;
+  }
+  createAuthorsBtnEl.insertAdjacentHTML('afterend', msg);
+}
+createAuthorsBtnEl.addEventListener('click', createAuthorsTable);
 // Sukurti app.js /addAuthor endpointa i kuri nuejus sukuriam nauja autoriu(pan kaip newPost buvo)
 
 // sukurti atskira foma skirta autoriui kur galima sukurti nauja autoriu
