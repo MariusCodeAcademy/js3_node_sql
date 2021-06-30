@@ -31,6 +31,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
   //   res.send('Express veikia normaliai');
 });
+app.get('/products', (req, res) => {
+  res.sendFile(path.join(__dirname, 'products.html'));
+  //   res.send('Express veikia normaliai');
+});
 
 // create database
 app.get('/createdb', (req, res) => {
@@ -67,13 +71,18 @@ app.get('/table/create', (req, res) => {
 // app.get('/authors/young' )
 
 // add new post
-app.post('/newpost', (req, res) => {
-  console.log('req.body', req.body);
-  //   const newPost = { title: 'Third Post Title', body: 'Third post body and something' };
-  const sql = 'INSERT INTO posts SET ?';
-  db.query(sql, req.body, (err, result) => {
+app.get('/newpost', (req, res) => {
+  // console.log('req.body', req.body);
+  const newPost = {
+    name: 'Janes',
+    sex: 'female',
+    age: 30,
+    post_id: 8,
+  };
+  const sql = 'INSERT INTO authors SET ?';
+  db.query(sql, newPost, (err, result) => {
     if (err) throw err.stack;
-    res.redirect('/post');
+    res.redirect('/');
     // res.json({ msg: 'irasas sukurtas', result });
   });
 });
